@@ -1530,6 +1530,9 @@ UTILITIES = {
   # Create a function bound to the current value of "this".
   bind: """
         function(func, context) {
+            if (Function.prototype.bind) {
+                return Function.prototype.bind.call(func, context);
+            }
             return function(){ return func.apply(context, arguments); };
           }
         """
